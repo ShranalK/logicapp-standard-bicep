@@ -26,6 +26,22 @@ resource logicapp 'Microsoft.Web/sites@2022-03-01' = {
       ftpsState: 'FtpsOnly'
       appSettings: [
         {
+          name: 'APP_KIND'
+          value: 'workflowApp'
+        }
+        {
+          name: 'AzureBlob_blobStorageEndpoint'
+          value: storage.properties.primaryEndpoints.blob
+        }
+        {
+          name: 'AZUREBLOB_CONNECTION_ID'
+          value: azureblob_connection.id
+        }
+        {
+          name: 'AZUREBLOB_API_ID'
+          value: azureblob_connection.properties.api.id
+        }
+        {
           name: 'FUNCTIONS_EXTENSION_VERSION'
           value: '~4'
         }
@@ -36,6 +52,10 @@ resource logicapp 'Microsoft.Web/sites@2022-03-01' = {
         {
           name: 'AzureWebJobsStorage'
           value: 'DefaultEndpointsProtocol=https;AccountName=${storage.name};EndpointSuffix=${environment().suffixes.storage};AccountKey=${listKeys(storage.id, storage.apiVersion).keys[0].value}'
+        }
+        {
+          name: 'WEBSITE_NODE_DEFAULT_VERSION'
+          value: '~16'
         }
       ]
     }
@@ -50,7 +70,7 @@ resource storage 'Microsoft.Storage/storageAccounts@2022-09-01' = {
   }
   kind: 'StorageV2'
   properties: {
-    minimumTlsVersion: '1.2'
+    minimumTlsVersion: 'TLS1_2'
   }
 }
 

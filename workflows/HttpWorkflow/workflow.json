@@ -7,7 +7,7 @@
                     "body": "@triggerBody()",
                     "host": {
                         "connection": {
-                            "referenceName": "azure_blob"
+                            "referenceName": "azureblob-logicapp-standard"
                         }
                     },
                     "method": "post",

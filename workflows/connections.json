@@ -2,13 +2,13 @@
   "managedApiConnections": {
     "azure_blob": {
       "api": {
-        "id": "/subscriptions/860a62c6-1e81-422f-b572-ae170e61099c/providers/Microsoft.Web/locations/australiaeast/managedApis/azureblob"
+        "id": "@appsettings('AZUREBLOB_API_ID')"
       },
       "authentication": {
         "type": "ManagedServiceIdentity"
       },
       "connection": {
-        "id": "/subscriptions/860a62c6-1e81-422f-b572-ae170e61099c/resourceGroups/rg-logicapp-standard-demo/providers/Microsoft.Web/connections/azureblob"
+        "id": "@appsettings('AZUREBLOB_CONNECTION_ID')"
       },
       "connectionProperties": {
         "authentication": {
