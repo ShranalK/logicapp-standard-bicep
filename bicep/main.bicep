@@ -1,6 +1,8 @@
+param location string
+
 resource asp 'Microsoft.Web/serverfarms@2022-03-01' = {
   name: 'asp-logicapp-standard-demo'
-  location: 'australiaeast'
+  location: location
   sku: {
     name: 'Free'
     tier: 'F1'
@@ -10,7 +12,7 @@ resource asp 'Microsoft.Web/serverfarms@2022-03-01' = {
 
 resource logicapp 'Microsoft.Web/sites@2022-03-01' = {
   name: 'la-logicapp-standard-demo'
-  location: 'australiaeast'
+  location: location
   kind: 'workflowapp,functionapp'
   identity: {
     type: 'SystemAssigned'

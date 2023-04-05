@@ -21,4 +21,5 @@ jobs:
       with:
         resourceGroupName: ${{ secrets.RESOURCE_GROUP }}
         template: ./bicep/main.bicep
+        parameters: ./bicep/parameters/demo.json
         failOnStdErr: false
