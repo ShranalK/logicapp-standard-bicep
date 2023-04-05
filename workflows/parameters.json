@@ -1,0 +1,6 @@
+{
+  "storageAccountName": {
+    "type": "string",
+    "value": "@appsetting('STORAGE_ACCOUNT_NAME')"
+  }
+}

@@ -46,6 +46,10 @@ resource logicapp 'Microsoft.Web/sites@2022-03-01' = {
           value: azureblob_connection.properties.connectionRuntimeUrl
         }
         {
+          name: 'AzureWebJobsStorage'
+          value: 'DefaultEndpointsProtocol=https;AccountName=${storage.name};EndpointSuffix=${environment().suffixes.storage};AccountKey=${listKeys(storage.id, storage.apiVersion).keys[0].value}'
+        }
+        {
           name: 'FUNCTIONS_EXTENSION_VERSION'
           value: '~4'
         }
@@ -54,9 +58,9 @@ resource logicapp 'Microsoft.Web/sites@2022-03-01' = {
           value: 'node'
         }
         {
-          name: 'AzureWebJobsStorage'
-          value: 'DefaultEndpointsProtocol=https;AccountName=${storage.name};EndpointSuffix=${environment().suffixes.storage};AccountKey=${listKeys(storage.id, storage.apiVersion).keys[0].value}'
-        }
+          name: 'STORAGE_ACCOUNT_NAME'
+          value: storage.name
+        }    
         {
           name: 'WEBSITE_NODE_DEFAULT_VERSION'
           value: '~16'
