@@ -2,13 +2,13 @@
   "managedApiConnections": {
     "azure_blob": {
       "api": {
-        "id": "@appsettings('AZUREBLOB_API_ID')"
+        "id": "@appsetting('AZUREBLOB_API_ID')"
       },
       "authentication": {
         "type": "ManagedServiceIdentity"
       },
       "connection": {
-        "id": "@appsettings('AZUREBLOB_CONNECTION_ID')"
+        "id": "@appsetting('AZUREBLOB_CONNECTION_ID')"
       },
       "connectionProperties": {
         "authentication": {
