@@ -4,8 +4,8 @@ resource asp 'Microsoft.Web/serverfarms@2022-03-01' = {
   name: 'asp-logicapp-standard-demo'
   location: location
   sku: {
-    name: 'Free'
-    tier: 'F1'
+    name: 'WS1'
+    tier: 'WorkflowStandard'
   }
   kind: 'windows'
 }
