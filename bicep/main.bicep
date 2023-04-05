@@ -19,6 +19,38 @@ resource logicapp 'Microsoft.Web/sites@2022-03-01' = {
   }
   properties: {
     serverFarmId: asp.id
+    httpsOnly: true
+    siteConfig: {
+      http20Enabled: true
+      minTlsVersion: '1.2'
+      ftpsState: 'FtpsOnly'
+      appSettings: [
+        {
+          name: 'FUNCTIONS_EXTENSION_VERSION'
+          value: '~4'
+        }
+        {
+          name: 'FUNCTIONS_WORKER_RUNTIME'
+          value: 'node'
+        }
+        {
+          name: 'AzureWebJobsStorage'
+          value: 'DefaultEndpointsProtocol=https;AccountName=${storage.name};EndpointSuffix=${environment().suffixes.storage};AccountKey=${listKeys(storage.id, storage.apiVersion).keys[0].value}'
+        }
+      ]
+    }
+  }
+}
+
+resource storage 'Microsoft.Storage/storageAccounts@2022-09-01' = {
+  name: 'salasdemo'
+  location: location
+  sku: {
+    name: 'Standard_LRS'
+  }
+  kind: 'StorageV2'
+  properties: {
+    minimumTlsVersion: '1.2'
   }
 }
 
@@ -27,7 +59,7 @@ resource azureblob_connection 'Microsoft.Web/connections@2016-06-01' = {
   location: location
   properties: {
     api: {
-      id: '/subscriptions/860a62c6-1e81-422f-b572-ae170e61099c/providers/Microsoft.Web/locations/australiaeast/managedApis/azureblob'
+      id: '/subscriptions/${subscription().subscriptionId}/providers/Microsoft.Web/locations/${location}/managedApis/azureblob'
     }
     displayName: 'azureblob-logicapp-standard'
     parameterValueSet: {
