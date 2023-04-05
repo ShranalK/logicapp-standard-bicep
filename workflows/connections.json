@@ -15,7 +15,8 @@
           "audience": "https://storage.azure.com/",
           "type": "ManagedServiceIdentity"
         }
-      }
+      },
+      "connectionRuntimeUrl": "@appsetting('AZUREBLOB_RUNTIME_URL')"
     }
   }
 }

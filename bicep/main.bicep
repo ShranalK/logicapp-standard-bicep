@@ -43,7 +43,7 @@ resource logicapp 'Microsoft.Web/sites@2022-03-01' = {
         }
         {
           name: 'AZUREBLOB_RUNTIME_URL'
-          value: reference(resourceId('Microsoft.Web/connections', azureblob_connection.name), '2016-06-01', 'full').properties.connectionRuntimeUrl
+          value: azureblob_connection.properties.connectionRuntimeUrl
         }
         {
           name: 'FUNCTIONS_EXTENSION_VERSION'
@@ -90,6 +90,21 @@ resource azureblob_connection 'Microsoft.Web/connections@2016-06-01' = {
     parameterValueSet: {
       name: 'managedIdentityAuth'
       values: {}
+    }
+  }
+}
+
+resource azureblob_accesspolicy 'Microsoft.Web/connections/accessPolicies@2016-06-01' = {
+  name: '${logicapp.name}-${guid(resourceGroup().name)}'
+  location: location
+  parent: azureblob_connection
+  properties: {
+    principal: {
+      type: 'ActiveDirectory'
+      identity: {
+        tenantId: subscription().tenantId
+        objectId: logicapp.identity.principalId
+      }
     }
   }
 }
