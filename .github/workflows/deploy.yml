@@ -18,6 +18,7 @@ jobs:
       # Deploy Bicep file
     - name: deploy
       uses: azure/arm-deploy@v1
+      id: infradeploy
       with:
         resourceGroupName: ${{ secrets.RESOURCE_GROUP }}
         template: ./bicep/main.bicep
@@ -32,3 +33,10 @@ jobs:
       with:
         app-name: la-logicapp-standard-demo
         package: './output/logic.zip'
+
+    # - name: Update Logic App Settings
+    #   uses: azure/CLI@v1
+    #   with:
+    #     azcliversion: 2.0.72
+    #     inlineScript: |
+    #       az functionapp config appsettings set --name la-logicapp-standard-demo --resource-group ${{ secrets.RESOURCE_GROUP }} --settings "AZUREBLOB_RUNTIME_URL=${{ steps.infradeploy.outputs.blobendpointurl }}"

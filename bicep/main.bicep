@@ -42,6 +42,10 @@ resource logicapp 'Microsoft.Web/sites@2022-03-01' = {
           value: azureblob_connection.properties.api.id
         }
         {
+          name: 'AZUREBLOB_RUNTIME_URL'
+          value: reference(resourceId('Microsoft.Web/connections', azureblob_connection.name), '2016-06-01', 'full').properties.connectionRuntimeUrl
+        }
+        {
           name: 'FUNCTIONS_EXTENSION_VERSION'
           value: '~4'
         }
@@ -88,3 +92,5 @@ resource azureblob_connection 'Microsoft.Web/connections@2016-06-01' = {
     }
   }
 }
+
+output blobendpointurl string = reference(resourceId('Microsoft.Web/connections', azureblob_connection.name), '2016-06-01', 'full').properties.connectionRuntimeUrl
