@@ -22,16 +22,16 @@ resource logicapp 'Microsoft.Web/sites@2022-03-01' = {
   }
 }
 
-// resource azureblob_connection 'Microsoft.Web/connections@2016-06-01' = {
-//   name: 'azureblobconnection'
-//   location: 'australiaeast'
-//   properties: {
-//     api: {
-//       id: '/subscriptions/860a62c6-1e81-422f-b572-ae170e61099c/providers/Microsoft.Web/locations/australiaeast/managedApis/azureblob'
-//     }
-//     displayName: 'azureblobconnection'
-//     parameterValues: {
-//       authenticationType: 'ManagedServiceIdentity'
-//     }
-//   }
-// }
+resource azureblob_connection 'Microsoft.Web/connections@2016-06-01' = {
+  name: 'azureblob-logicapp-standard'
+  location: location
+  properties: {
+    api: {
+      id: '/subscriptions/860a62c6-1e81-422f-b572-ae170e61099c/providers/Microsoft.Web/locations/australiaeast/managedApis/azureblob'
+    }
+    displayName: 'azureblob-logicapp-standard'
+    parameterValues: {
+      authenticationType: 'ManagedServiceIdentity'
+    }
+  }
+}
