@@ -78,7 +78,7 @@ resource storage 'Microsoft.Storage/storageAccounts@2022-09-01' = {
   }
 }
 
-resource azureblob_connection 'Microsoft.Web/connections@2016-06-01' = {
+resource azureblob_connection 'Microsoft.Web/connections@2018-07-01-preview' = {
   name: 'azureblob-logicapp-standard'
   location: location
   properties: {
