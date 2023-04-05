@@ -1,0 +1,53 @@
+{
+    "definition": {
+        "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
+        "actions": {
+            "Create_block_blob_(V2)": {
+                "inputs": {
+                    "body": "@triggerBody()",
+                    "host": {
+                        "connection": {
+                            "referenceName": "azure_blob"
+                        }
+                    },
+                    "method": "post",
+                    "path": "/v2/codeless/datasets/@{encodeURIComponent('rglogicappstandardda54c')}/CreateBlockBlob",
+                    "queries": {
+                        "folderPath": "/demo",
+                        "name": "samplefile.txt"
+                    }
+                },
+                "runAfter": {},
+                "runtimeConfiguration": {
+                    "contentTransfer": {
+                        "transferMode": "Chunked"
+                    }
+                },
+                "type": "ApiConnection"
+            },
+            "Response": {
+                "inputs": {
+                    "body": "@body('Create_block_blob_(V2)')",
+                    "statusCode": 200
+                },
+                "kind": "http",
+                "runAfter": {
+                    "Create_block_blob_(V2)": [
+                        "Succeeded"
+                    ]
+                },
+                "type": "Response"
+            }
+        },
+        "contentVersion": "1.0.0.0",
+        "outputs": {},
+        "triggers": {
+            "manual": {
+                "inputs": {},
+                "kind": "Http",
+                "type": "Request"
+            }
+        }
+    },
+    "kind": "Stateful"
+}
