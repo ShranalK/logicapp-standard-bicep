@@ -63,7 +63,7 @@ resource logicapp 'Microsoft.Web/sites@2022-03-01' = {
         }    
         {
           name: 'WEBSITE_NODE_DEFAULT_VERSION'
-          value: '~16'
+          value: '~14'
         }
       ]
     }

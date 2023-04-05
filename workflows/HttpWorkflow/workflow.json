@@ -11,7 +11,7 @@
                         }
                     },
                     "method": "post",
-                    "path": "/v2/codeless/datasets/@{encodeURIComponent('salasdemo')}/CreateBlockBlob",
+                    "path": "/v2/codeless/datasets/@{encodeURIComponent(parameters('storageAccountName'))}/CreateBlockBlob",
                     "queries": {
                         "folderPath": "/demo",
                         "name": "samplefile.txt"
