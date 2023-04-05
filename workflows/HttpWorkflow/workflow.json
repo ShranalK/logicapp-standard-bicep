@@ -11,7 +11,7 @@
                         }
                     },
                     "method": "post",
-                    "path": "/v2/codeless/datasets/@{encodeURIComponent('rglogicappstandardda54c')}/CreateBlockBlob",
+                    "path": "/v2/codeless/datasets/@{encodeURIComponent('salasdemo')}/CreateBlockBlob",
                     "queries": {
                         "folderPath": "/demo",
                         "name": "samplefile.txt"
