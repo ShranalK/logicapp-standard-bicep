@@ -31,7 +31,7 @@ resource azureblob_connection 'Microsoft.Web/connections@2016-06-01' = {
     }
     displayName: 'azureblob-logicapp-standard'
     parameterValues: {
-      authenticationType: 'ManagedServiceIdentity'
+      authentication: 'ManagedIdentity'
     }
   }
 }
