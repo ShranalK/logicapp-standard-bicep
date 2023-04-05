@@ -82,6 +82,14 @@ resource storage 'Microsoft.Storage/storageAccounts@2022-09-01' = {
   }
 }
 
+resource logicapp_roleassignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
+  name: guid('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', resourceGroup().name, logicapp.name, storage.name, 'ba92f5b4-2d11-453d-a403-e96b0029c9fe')
+  properties: {
+    roleDefinitionId: resourceId('Microsoft.Authorization/roleDefinitions', 'Storage Blob Data Contributor')
+    principalId: logicapp.identity.principalId
+  }
+}
+
 resource azureblob_connection 'Microsoft.Web/connections@2016-06-01' = {
   name: 'azureblob-logicapp-standard'
   location: location
