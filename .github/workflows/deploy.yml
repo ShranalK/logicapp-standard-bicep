@@ -2,7 +2,7 @@ name: 'Logic App Standard'
 on:
   push:
     branches:
-      - 'develop'
+      - 'main'
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
