@@ -80,6 +80,14 @@ resource storage 'Microsoft.Storage/storageAccounts@2022-09-01' = {
   properties: {
     minimumTlsVersion: 'TLS1_2'
   }
+
+  resource blobservice 'blobServices@2022-09-01' = {
+    name: 'default'
+
+    resource container 'containers@2022-09-01' = {
+      name: 'demo'
+    }
+  }
 }
 
 resource logicapp_roleassignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
@@ -106,19 +114,17 @@ resource azureblob_connection 'Microsoft.Web/connections@2016-06-01' = {
   }
 }
 
-resource azureblob_accesspolicy 'Microsoft.Web/connections/accessPolicies@2016-06-01' = {
-  name: '${logicapp.name}-${guid(resourceGroup().name)}'
-  location: location
-  parent: azureblob_connection
-  properties: {
-    principal: {
-      type: 'ActiveDirectory'
-      identity: {
-        tenantId: subscription().tenantId
-        objectId: logicapp.identity.principalId
-      }
-    }
-  }
-}
-
-output blobendpointurl string = reference(resourceId('Microsoft.Web/connections', azureblob_connection.name), '2016-06-01', 'full').properties.connectionRuntimeUrl
+// resource azureblob_accesspolicy 'Microsoft.Web/connections/accessPolicies@2016-06-01' = {
+//   name: '${logicapp.name}-${guid(resourceGroup().name)}'
+//   location: location
+//   parent: azureblob_connection
+//   properties: {
+//     principal: {
+//       type: 'ActiveDirectory'
+//       identity: {
+//         tenantId: subscription().tenantId
+//         objectId: logicapp.identity.principalId
+//       }
+//     }
+//   }
+// }
