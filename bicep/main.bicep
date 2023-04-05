@@ -78,9 +78,10 @@ resource storage 'Microsoft.Storage/storageAccounts@2022-09-01' = {
   }
 }
 
-resource azureblob_connection 'Microsoft.Web/connections@2018-07-01-preview' = {
+resource azureblob_connection 'Microsoft.Web/connections@2016-06-01' = {
   name: 'azureblob-logicapp-standard'
   location: location
+  kind: 'V2'
   properties: {
     api: {
       id: '/subscriptions/${subscription().subscriptionId}/providers/Microsoft.Web/locations/${location}/managedApis/azureblob'
