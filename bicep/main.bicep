@@ -30,8 +30,9 @@ resource azureblob_connection 'Microsoft.Web/connections@2016-06-01' = {
       id: '/subscriptions/860a62c6-1e81-422f-b572-ae170e61099c/providers/Microsoft.Web/locations/australiaeast/managedApis/azureblob'
     }
     displayName: 'azureblob-logicapp-standard'
-    parameterValues: {
-      authentication: 'ManagedIdentity'
+    parameterValueSet: {
+      name: 'managedIdentityAuth'
+      values: {}
     }
   }
 }
