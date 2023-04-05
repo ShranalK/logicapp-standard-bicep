@@ -92,6 +92,7 @@ resource storage 'Microsoft.Storage/storageAccounts@2022-09-01' = {
 
 resource logicapp_roleassignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = {
   name: guid('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', resourceGroup().name, logicapp.name, storage.name, 'ba92f5b4-2d11-453d-a403-e96b0029c9fe')
+  scope: storage
   properties: {
     roleDefinitionId: resourceId('Microsoft.Authorization/roleDefinitions', 'ba92f5b4-2d11-453d-a403-e96b0029c9fe')
     principalId: logicapp.identity.principalId
