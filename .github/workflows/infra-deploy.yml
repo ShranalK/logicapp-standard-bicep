@@ -2,6 +2,9 @@ name: 'Logic App Standard Infra'
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - "bicep/**"
     
 jobs:
   build-and-deploy:
@@ -22,5 +25,6 @@ jobs:
       with:
         resourceGroupName: ${{ secrets.RESOURCE_GROUP }}
         template: ./bicep/main.bicep
+        deploymentmode: Incremental
         parameters: ./bicep/parameters/demo.json
         failOnStdErr: false

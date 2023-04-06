@@ -2,6 +2,9 @@ name: 'Logic App Standard'
 
 on:
   workflow_dispatch:
+  push:
+    paths:
+      - "workflows/**"
     
 jobs:
   build-and-deploy:
