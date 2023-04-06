@@ -115,17 +115,17 @@ resource azureblob_connection 'Microsoft.Web/connections@2016-06-01' = {
   }
 }
 
-// resource azureblob_accesspolicy 'Microsoft.Web/connections/accessPolicies@2016-06-01' = {
-//   name: '${logicapp.name}-${guid(resourceGroup().name)}'
-//   location: location
-//   parent: azureblob_connection
-//   properties: {
-//     principal: {
-//       type: 'ActiveDirectory'
-//       identity: {
-//         tenantId: subscription().tenantId
-//         objectId: logicapp.identity.principalId
-//       }
-//     }
-//   }
-// }
+resource azureblob_accesspolicy 'Microsoft.Web/connections/accessPolicies@2016-06-01' = {
+  name: '${logicapp.name}-${guid(resourceGroup().name)}'
+  location: location
+  parent: azureblob_connection
+  properties: {
+    principal: {
+      type: 'ActiveDirectory'
+      identity: {
+        tenantId: subscription().tenantId
+        objectId: logicapp.identity.principalId
+      }
+    }
+  }
+}
